@@ -65,9 +65,9 @@ chmod +x install.sh scripts/*.sh
 |---|---|
 | `prefix \|` | Split pane vertically |
 | `prefix -` | Split pane horizontally |
-| `Alt+h/j/k/l` | Navigate panes (no prefix!) |
-| `Alt+p / Alt+n` | Previous / next window |
-| `Alt+z` | Zoom pane toggle |
+| `prefix h/j/k/l` | Navigate panes (vim-style) |
+| `prefix [` / `prefix ]` | Previous / next window |
+| `prefix z` | Zoom pane toggle |
 | `prefix r` | Reload tmux config |
 | `prefix I` | Install plugins (TPM) |
 

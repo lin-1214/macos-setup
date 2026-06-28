@@ -10,6 +10,10 @@ fi
 BREW_PREFIX="$(brew --prefix 2>/dev/null || echo /opt/homebrew)"
 export PATH="$HOME/.local/bin:$PATH"
 
+# Cursor — add CLI to PATH
+[[ -d "/Applications/Cursor.app/Contents/Resources/app/bin" ]] && \
+  export PATH="/Applications/Cursor.app/Contents/Resources/app/bin:$PATH"
+
 # ─────────────────────────────────────────────────────────────────────────────
 # History
 # ─────────────────────────────────────────────────────────────────────────────
@@ -153,6 +157,14 @@ alias tk='tmux kill-session -t'
 alias tn='tmux new-session -s'
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Aliases — Cursor
+# ─────────────────────────────────────────────────────────────────────────────
+if command -v cursor &>/dev/null; then
+  alias c.='cursor .'           # open current dir in Cursor
+  alias c='cursor'              # open file(s) in Cursor
+fi
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Aliases — Claude Code
 # ─────────────────────────────────────────────────────────────────────────────
 alias cc='claude'
@@ -230,10 +242,13 @@ cw() {
   # Window 2 — shell: for running tests, git, misc commands
   tmux new-window -t "$name" -n "shell" -c "$PWD"
 
-  # Window 3 — editor: open nvim if available, otherwise leave at prompt
-  tmux new-window -t "$name" -n "editor" -c "$PWD"
-  if command -v nvim &>/dev/null; then
-    tmux send-keys -t "${name}:editor" "nvim ." Enter
+  # Window 3 — build: shell for tests, build output, logs
+  tmux new-window -t "$name" -n "build" -c "$PWD"
+
+  # Open Cursor for the project (GUI, runs outside tmux)
+  if command -v cursor &>/dev/null; then
+    cursor . &>/dev/null &
+    disown
   fi
 
   # Land on the claude window

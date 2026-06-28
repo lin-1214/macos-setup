@@ -70,12 +70,20 @@ for pkg in "${PACKAGES[@]}"; do
   fi
 done
 
-# Nerd Font — needed for icons in eza/starship
-if ! brew list --cask font-jetbrains-mono-nerd-font &>/dev/null 2>&1; then
-  echo "  [install] font-jetbrains-mono-nerd-font"
-  brew install --cask font-jetbrains-mono-nerd-font
-else
-  echo "  [skip] font-jetbrains-mono-nerd-font"
-fi
+# Casks
+CASKS=(
+  font-jetbrains-mono-nerd-font   # icons in eza/starship
+  cursor                          # AI code editor
+)
+
+for cask in "${CASKS[@]}"; do
+  [[ "$cask" == \#* ]] && continue
+  if brew list --cask "$cask" &>/dev/null 2>&1; then
+    echo "  [skip] $cask"
+  else
+    echo "  [install] $cask"
+    brew install --cask "$cask"
+  fi
+done
 
 echo "Homebrew packages done."
