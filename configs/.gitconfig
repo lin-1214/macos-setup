@@ -1,0 +1,50 @@
+# Global git config — symlinked from macos-setup/configs/.gitconfig
+# Set user identity separately (not committed here):
+#   git config --global user.name  "Your Name"
+#   git config --global user.email "your@email.com"
+
+[core]
+  pager      = delta
+  editor     = vim
+  autocrlf   = input      # normalize CRLF→LF on commit; leave LF alone on checkout
+
+[delta]
+  navigate        = true  # n/N to jump between diff sections
+  side-by-side    = true
+  line-numbers    = true
+  syntax-theme    = Dracula
+
+[interactive]
+  diffFilter = delta --color-only
+
+[merge]
+  conflictstyle = zdiff3   # show common ancestor in conflicts
+
+[diff]
+  colorMoved = default     # highlight moved lines differently from changed lines
+
+[pull]
+  rebase = true            # rebase instead of merge on pull (cleaner history)
+
+[push]
+  autoSetupRemote = true   # `git push` works without -u on first push
+  default         = current
+
+[rebase]
+  autoStash = true         # auto stash/pop around rebase
+
+[init]
+  defaultBranch = main
+
+[rerere]
+  enabled = true           # remember how you resolved conflicts for next time
+
+[alias]
+  lg       = log --oneline --graph --decorate --all
+  files    = diff-tree --no-commit-id -r --name-only   # files changed in a commit
+  undo     = reset --soft HEAD~1                        # undo last commit, keep staged
+  uncommit = reset HEAD~1                               # undo last commit, unstage
+  cleanup  = "!git branch --merged | grep -vE '(\\*|main|master|develop)' | xargs -r git branch -d"
+
+  # Show all aliases
+  aliases  = config --get-regexp alias

@@ -1,0 +1,17 @@
+{
+  "theme": "dark",
+  "autoUpdaterStatus": "enabled",
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Bash(gh *)",
+      "Bash(ls *)",
+      "Bash(find *)",
+      "Bash(rg *)",
+      "Bash(fd *)",
+      "Bash(cat *)",
+      "Bash(bat *)",
+      "Bash(eza *)"
+    ]
+  }
+}
