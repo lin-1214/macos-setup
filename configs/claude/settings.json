@@ -1,6 +1,4 @@
 {
-  "theme": "dark",
-  "autoUpdaterStatus": "enabled",
   "permissions": {
     "allow": [
       "Bash(git *)",
@@ -13,5 +11,7 @@
       "Bash(bat *)",
       "Bash(eza *)"
     ]
-  }
+  },
+  "theme": "dark",
+  "autoUpdaterStatus": "enabled"
 }

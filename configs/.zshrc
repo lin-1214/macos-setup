@@ -291,3 +291,5 @@ fi
 
 # Source machine-local overrides (not committed to git)
 [[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
+
+cd ~/Desktop/yyl/GitHub
